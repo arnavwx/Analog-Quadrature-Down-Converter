@@ -6,7 +6,20 @@
 
 This repository contains the complete design, analysis, simulation, and hardware realization of a Quadrature Down Converter (QDC) designed for modern wireless receiver front-ends. Quadrature downconversion is an essential technique used in communication systems (Wi-Fi, Bluetooth, WLAN) to mitigate image interference and allow for zero-IF baseband processing.
 
-## 🚀 Key Specifications
+> **📄 Final Project Report:** [Read the Final Submission Report](Final_Submission_Report.pdf) for the comprehensive 8-page IEEE formatting analysis, schematic calculations, and oscilloscope comparisons.
+
+---
+
+## 📚 Theory & Concept Documentation
+We have compiled an extensive set of theoretical notes explaining every aspect of the project's operation, from system-level architecture down to device physics. Dive into the `/theory` folder to explore:
+- **[01. Direct-Conversion Architecture](theory/01_Direct_Conversion_Architecture.md)**: Zero-IF vs Superheterodyne, and why I/Q paths are required to decode sidebands.
+- **[02. NMOS Mixer Theory](theory/02_Mixer_Theory.md)**: Active vs Passive mixers, Conversion Gain, and Isolation.
+- **[03. Quadrature Oscillators](theory/03_Quadrature_Oscillators.md)**: The Barkhausen criterion and Op-Amp integrators.
+- **[04. CMOS & Filter Theory](theory/04_CMOS_Process_and_Filter_Theory.md)**: TSMC 180nm process details and active Butterworth Low-Pass filter characteristics.
+
+---
+
+## ⚙️ Key Specifications
 | Parameter | Value |
 |-----------|-------|
 | **LO Frequency** | 150 kHz |
@@ -18,10 +31,8 @@ This repository contains the complete design, analysis, simulation, and hardware
 
 ---
 
-## 🧩 System Architecture
+## 🏗️ System Architecture
 The QDC system translates a high-frequency RF signal down to an Intermediate Frequency (IF) using two orthogonal local oscillator signals ($0^\circ$ and $90^\circ$). This preserves both the amplitude and phase information of the original complex baseband signal.
-
-The complete system is built from three tightly integrated subsystems:
 
 ### 1. Quadrature Oscillator
 A robust two-integrator feedback loop employing UA741 operational amplifiers. The amplitude is stabilized to a clean $1 V_{PP}$ without saturation distortion using a soft diode-clipping network (1N4148 pairs). This subsystem produces two sinusoidal signals ($v_{OSCI}$ and $v_{OSCQ}$) with exactly a $90^\circ$ phase difference.
@@ -34,13 +45,17 @@ The IF outputs from the mixers are filtered by an RC low-pass filter (cutoff $\a
 
 ---
 
-## 🛠️ Repository Structure
+## 📁 Repository Structure
 
 ```text
-├── docs/                   # IEEE Project Report and Diagrams
-├── hardware/               # BOM and Hardware Measurement Data
-└── simulation/             # LTspice project files
-    ├── models/             # Standard models (TSMC 180nm, UA741)
+├── Final_Submission_Report.pdf   # IEEE Project Report
+├── theory/                       # Detailed Theory and Component Mathematics
+├── docs/
+│   ├── images/                   # High-res extracted LTspice Layouts & Lab Screenshots
+│   └── references/               # Core literature and IEEE papers
+├── hardware/                     # BOM and Hardware Measurement Data
+└── simulation/                   # LTspice project files
+    ├── models/                   # Standard models (TSMC 180nm, UA741)
     ├── quadrature_oscillator.asc
     ├── nmos_mixer.asc
     ├── low_pass_filter.asc
@@ -62,7 +77,7 @@ Hardware validation confirmed that the architecture successfully translates the 
 
 ---
 
-## ⚙️ Running the Simulations
+## 🚀 Running the Simulations
 1. Clone this repository.
 2. Ensure you have **LTspice** installed.
 3. Open any `.asc` file in the `simulation/` directory.
